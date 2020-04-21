@@ -1,7 +1,7 @@
 import time
 from pynput.keyboard import Key, Controller
 
-keyboard = Controller()
+import SerialController
 
 # Press and release space
 keyboard.press(Key.space)
