@@ -3,10 +3,11 @@ import time
 import SerialController
 from Microcontroller import ArduinoUNO
 
-# Press and release space
-keyboard.press(Key.space)
-keyboard.release(Key.space)
+from pynput.keyboard import Key, Controller as KeyboardController
+from pynput.mouse import Button, Controller as MouseController
 
+keyboard = KeyboardController()
+mouse = MouseController()
 microcontroller = ArduinoUNO()
 
 def main():
