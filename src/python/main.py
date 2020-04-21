@@ -10,6 +10,8 @@ keyboard = KeyboardController()
 mouse = MouseController()
 microcontroller = ArduinoUNO()
 
+#TODO radio with headset button
+
 def main():
     print(microcontroller.__dict__)
 
