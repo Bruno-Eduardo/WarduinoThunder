@@ -4,6 +4,7 @@ import time
 
 from SerialController import SerialController
 from Microcontroller import ArduinoUNO
+from OutputController import OutputController
 
 from HeadsetController import HeadsetController
 from pynput.keyboard import Key, Controller as KeyboardController
@@ -17,10 +18,17 @@ headset = HeadsetController()
 
 microcontroller = ArduinoUNO()
 serial = SerialController(microcontroller)
+output = OutputController()
 
 
 def main():
-    print(microcontroller.__dict__)
+    # main loop
+    output_state = None
+    while True:
+        new_input = serial.get_input()
+        output_state = output.update(new_input)
+        time.sleep(2)
+
 
 
 if __name__ == '__main__':
