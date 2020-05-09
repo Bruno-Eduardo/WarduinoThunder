@@ -51,5 +51,5 @@ class OutputController():
         self.gears = self.digital_input[DIGITAL_PORT_MAPPER['GEARS']]
 
 
-    def set_throttle(self, first):
-        self.throttle = self.analog_input[ANALOG_PORT_MAPPER['THROTTLE']]
+def rising_edge(old, new):
+    return (old == '0' and new == '1')
