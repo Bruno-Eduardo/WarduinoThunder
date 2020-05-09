@@ -66,11 +66,13 @@ class OutputController():
         first = self.state is None # TODO: check if this is really usefull
 
         self.old_state = self.state
-        self.set_gear(first)
-        self.set_throttle(first)
+        self.state = State( first,
+                            new_input,
+                            headset_input,
+                            keys=[  'GEARS',
+                                    'THROTTLE',])
 
-        self.state = (self.gears,
-                      self.throttle)
+        self.output_over_state_diff(self.state, self.old_state)
 
     def output_over_state_diff(self, state, old_state):
         if old_state is None:
