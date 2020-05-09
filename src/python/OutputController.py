@@ -72,13 +72,13 @@ class OutputController():
         self.state = (self.gears,
                       self.throttle)
 
-            if old_state is not None:
-                if old_state.gears == LANDED and state.gears != LANDED:
-                    self.press_release(KEYBOARD_CONTROLL['TOGGLE_GEARS']) # ASYNC HERE
-            else:
-                # TODO
-                pass
     def output_over_state_diff(self, state, old_state):
+        if old_state is None:
+            print('TODO old state is None') # TODO old state is None
+            return
+
+        if old_state.gears != state.gears:
+            self.press_release(KEYBOARD_CONTROLL['TOGGLE_GEARS'])
 
     def set_gear(self, first):
         self.gears = self.digital_input[DIGITAL_PORT_MAPPER['GEARS']]
