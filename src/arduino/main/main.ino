@@ -38,8 +38,7 @@ void loop() {
     // Dumping analog pins as strings(comma-separated values)
     Serial.write(',');
     for (int i=0; i<N_ANALOG_PINS; i++){
-        analogBuffer = itoa(analogRead(i), 4, 10);
-        Serial.write(analogBuffer);
-        Serial.write(',');
+        sprintf(analogBuffer, "%04d\0", analogRead(i));
+        Serial.write(analogBuffer); Serial.write(',');
     }
 }
