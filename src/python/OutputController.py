@@ -18,8 +18,35 @@ ANALOG_PORT_MAPPER = {  'THROTTLE': 0,
                         'ANALOG_MISC2': 5}
 KEYBOARD_CONTROLL = {'TOGGLE_GEARS': 'g'}
 
+
+class State():
+    def __init__(self, first, serial_input, headset_input, keys=[]):
+        self.first = first
+        self.digital_input, self.analog_input = serial_input
+        self.headset_input = headset_input
+
+        [self.set_state_by_key(key) for key in keys]
+
+        if len(self.analog_input) != 6: raise Exception('analog size was wrong')
+
+
+    def set_state_by_key(self, key):
+        if key in DIGITAL_PORT_MAPPER:
+            self.__dict__.update({key.lower(): self.digital_input[DIGITAL_PORT_MAPPER[key.upper()]]})
+        elif key in ANALOG_PORT_MAPPER:
+            self.__dict__.update({key.lower(): self.analog_input[ANALOG_PORT_MAPPER[key.upper()]]})
+        else:
+            raise Exception('Key not found')
+
+
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __repr__(self):
+        return 'State:' + str(self)
+
+
 class OutputController():
-    LANDED = 0
 
     def __init__(self):
         self.state = self.update(None)
