@@ -28,12 +28,9 @@ class OutputController():
         if new_input is None:
             print("Waiting for new inputs") # TODO change to logger
             self.state = None
-            return self.state
-        elif self.state is None and new_input is not None:
-            first = True # TODO: check if this is really usefull
-        else:
-            first = False
-            print("Just a normal update")
+            return
+
+        first = self.state is None # TODO: check if this is really usefull
 
         self.old_state = self.state
         self.set_gear(first)
