@@ -40,12 +40,9 @@ class SerialController():
             now = time.time()
 
     def read(self, bytes_to_read):
-        read_bytes = []
-        #for _ in range(bytes_to_read):
-            #read_bytes.append(self.serial.read()) #TODO uncomment when arduino is working
-            # b'W' = 01010111
-            # read_bytes.append(b'W')
-        read_bytes = [b'W',b'W',b'1',b'0',b'2',b'3',b',',b'1',b'0',b'2',b'3',b',',b'0',b'5',b'1',b'2',b',',b'0',b'5',b'1',b'2',b',',b'1',b'0',b'2',b'3',b',',b'1',b'0',b'2',b'3',b',']
+        self.clear_buffer(bytes_to_read)
+        read_bytes = [self.serial.read() for _ in range(bytes_to_read)]
+        # read_bytes = [b'W',b'W',b'1',b'0',b'2',b'2',b',',b'1',b'0',b'2',b'3',b',',b'0',b'5',b'1',b'2',b',',b'0',b'5',b'1',b'2',b',',b'1',b'0',b'2',b'3',b',',b'1',b'0',b'2',b'3',b',']
         return read_bytes
 
     def update_input(self):
