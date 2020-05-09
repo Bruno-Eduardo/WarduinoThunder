@@ -48,8 +48,10 @@ class State():
 
 class OutputController():
 
-    def __init__(self):
+    def __init__(self, keyboard, mouse):
         self.state = self.update(None)
+        self.keyboard = keyboard
+        self.mouse = mouse
 
     def update(self, new_input, headset_input=None):
         if new_input is None:

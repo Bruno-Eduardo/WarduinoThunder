@@ -18,7 +18,7 @@ headset = HeadsetController()
 
 microcontroller = ArduinoUNO()
 serial = SerialController(microcontroller)
-output = OutputController()
+output = OutputController(keyboard, mouse)
 
 
 def main():
