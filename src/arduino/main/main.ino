@@ -30,15 +30,15 @@ void loop() {
     for (int i=0; i<digitalStateBufferSize; i++){
         digitalBuffer = 0;
         for (int j=i*8; j<8*(i+1); j++){
-            digitalBuffer << 1;
+            digitalBuffer = digitalBuffer << 1;
             digitalBuffer |= digitalRead(j);
         }
         Serial.write(digitalBuffer);
     }
     // Dumping analog pins as strings(comma-separated values)
-    Serial.write(',');
     for (int i=0; i<N_ANALOG_PINS; i++){
         sprintf(analogBuffer, "%04d\0", analogRead(i));
         Serial.write(analogBuffer); Serial.write(',');
     }
+    Serial.println();
 }
