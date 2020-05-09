@@ -2,12 +2,11 @@
 #define N_DIGITAL_PINS 14
 #define N_ANALOG_PINS 6
 
-#define digitalStateBufferSize (N_DIGITAL_PINS-8)/8+1
+#define digitalStateBufferSize (N_DIGITAL_PINS-8)/8+2
 
 void setup() {
     Serial.begin(BAUDRATE);
     while (!Serial) {;}
-    while (Serial.availableForWrite()>0){;}
 
     // All digital pins as inputs
     for (int i=0; i<=13; i++)
@@ -28,18 +27,18 @@ void loop() {
     char* analogBuffer = "0000";
 
     // Dumping digital pins
-    for (int i=0, digitalBuffer=0; i<digitalStateBufferSize; i++)
+    for (int i=0; i<digitalStateBufferSize; i++){
         digitalBuffer = 0;
-        for (int j=0+digitalStateBufferSize; j<8; j++){
-            digitalBuffer << 1;
+        for (int j=i*8; j<8*(i+1); j++){
+            digitalBuffer = digitalBuffer << 1;
             digitalBuffer |= digitalRead(j);
         }
         Serial.write(digitalBuffer);
-
+    }
     // Dumping analog pins as strings(comma-separated values)
     for (int i=0; i<N_ANALOG_PINS; i++){
-        analogBuffer = itoa(analogRead(i), 4, 10);
-        Serial.write(analogBuffer);
-        Serial.write(',');
+        sprintf(analogBuffer, "%04d\0", analogRead(i));
+        Serial.write(analogBuffer); Serial.write(',');
     }
+    Serial.println();
 }
