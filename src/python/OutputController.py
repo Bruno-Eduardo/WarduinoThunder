@@ -1,25 +1,25 @@
+DIGITAL_PORT_MAPPER = { 'GEARS': 2,
+                        'LEFT_PEDAL': 3,
+                        'RIGHT_PEDAL': 4,
+                        'FLAPS': 5,
+                        'BRAKE': 6,
+                        'AIR_BRAKE': 7,
+                        'BOMB': 8,
+                        'ROCKET': 9,
+                        'JUMP':10,
+                        'RELOAD':11,
+                        'INIT_GROUND_OR_AIR':12,
+                        'DIG_MISC1':13}
+ANALOG_PORT_MAPPER = {  'THROTTLE': 0,
+                        'ELEVATOR': 1,
+                        'AILERONS': 2,
+                        'RUDDER': 3,
+                        'ANALOG_MISC1': 4,
+                        'ANALOG_MISC2': 5}
+KEYBOARD_CONTROLL = {'TOGGLE_GEARS': 'g'}
+
 class OutputController():
     LANDED = 0
-
-    DIGITAL_PORT_MAPPER = { 'GEARS': 2,
-                            'LEFT_PEDAL': 3,
-                            'RIGHT_PEDAL': 4,
-                            'FLAPS': 5,
-                            'BRAKE': 6,
-                            'AIR_BRAKE': 7,
-                            'BOMB': 8,
-                            'ROCKET': 9,
-                            'JUMP':10,
-                            'RELOAD':11,
-                            'INIT_GROUND_OR_AIR':12,
-                            'DIG_MISC1':13}
-    ANALOG_PORT_MAPPER = {  'THROTTLE': 0,
-                            'ELEVATOR': 1,
-                            'AILERONS': 2,
-                            'RUDDER': 3,
-                            'ANALOG_MISC1': 4,
-                            'ANALOG_MISC2': 5}
-    KEYBOARD_CONTROLL = {'TOGGLE_GEARS': 'g'}
 
     def __init__(self):
         self.state = self.update(None)
