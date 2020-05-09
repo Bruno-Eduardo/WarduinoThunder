@@ -24,7 +24,7 @@ class OutputController():
     def __init__(self):
         self.state = self.update(None)
 
-    def update(self, new_input):
+    def update(self, new_input, headset_input=None):
         if new_input is None:
             print("Waiting for new inputs") # TODO change to logger
             self.state = None

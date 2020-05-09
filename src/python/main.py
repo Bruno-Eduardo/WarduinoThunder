@@ -25,9 +25,9 @@ def main():
     # main loop
     output_state = None
     while True:
-        new_input = serial.get_input()
-        output_state = output.update(new_input)
-        time.sleep(2)
+        serial_input = serial.get_input()
+        headset_input = headset.get_input()
+        output.update(serial_input, headset_input)
 
 
 
