@@ -31,6 +31,14 @@ class SerialController():
         except: # TODO which Exceptions?
             pass
 
+    def clear_buffer(self, bytes_to_read):
+        loop_starts = time.time()
+        now = time.time()
+
+        while(now-loop_starts < 0.01):
+            self.serial.readline()
+            now = time.time()
+
     def read(self, bytes_to_read):
         read_bytes = []
         #for _ in range(bytes_to_read):
