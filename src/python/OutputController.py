@@ -1,3 +1,7 @@
+import threading
+import time
+
+running_threads = []
 DIGITAL_PORT_MAPPER = { 'GEARS': 2,
                         'LEFT_PEDAL': 3,
                         'RIGHT_PEDAL': 4,
@@ -79,6 +83,18 @@ class OutputController():
     def set_gear(self, first):
         self.gears = self.digital_input[DIGITAL_PORT_MAPPER['GEARS']]
 
+
+    def press_release(self, key, release_time=0.1):
+        def assync_press():
+            if key in running_threads: return
+            running_threads.append(key)
+            self.keyboard.press(key);
+            time.sleep(release_time)
+            self.keyboard.release(key)
+            running_threads.remove(key)
+
+        thr = threading.Thread(target=assync_press)
+        thr.start()
 
 def rising_edge(old, new):
     return (old == '0' and new == '1')
